@@ -1,0 +1,141 @@
+
+AMDuProf PROFILE REPORT
+
+EXECUTION
+Target Path:,"/home/babreu/profiling/SnapQMC/snapshot"
+Command Line Arguments:
+Working Directory:,"/home/babreu/profiling/SnapQMC"
+Environment Variables:
+CPU Details:,"Family(0x17), Model(0x31), Number of Cores(128)"
+Operating System:,"LinuxCentOS Linux 8 (Core)-64 Kernel:4.18.0-147.el8.x86_64"
+
+PROFILE DETAILS
+Profile Session Type:,"Time-based Sampling"
+Profile Scope:,"Single Application"
+CPU Mask:,"0-127"
+CPU Affinity Mask:,"0-127"
+Profile Start Time:,"Aug-04-2021_13-27-51"
+Profile End Time:,"Aug-04-2021_13-27-55"
+Profile Duration:,"4 seconds"
+Data Folder:,"/home/babreu/profiling/SnapQMC"
+Virtual Machine:,"No"
+Call Stack Sampling:,"False"
+
+Monitored Events:,Name,Interval
+,"CPU Time",1000 micro seconds
+
+"HOT FUNCTIONS (Sort Event - CPU_TIME)"
+FUNCTION,"CPU_TIME" (seconds),"Module"
+"matinv_",1.9780,/home/babreu/profiling/SnapQMC/snapshot
+"MAIN__",0.8520,/home/babreu/profiling/SnapQMC/snapshot
+"__memmove_avx_unaligned_erms",0.1030,/usr/lib64/libc-2.28.so
+"_intel_fast_memcpy",0.0590,/home/babreu/profiling/SnapQMC/snapshot
+"functions_mp_rannyu_",0.0380,/home/babreu/profiling/SnapQMC/snapshot
+"__memcpy_avx_unaligned",0.0120,/usr/lib64/libc-2.28.so
+"for_realloc_lhs",0.0050,/home/babreu/profiling/SnapQMC/snapshot
+"[PLT] memcpy",0.0040,/home/babreu/profiling/SnapQMC/snapshot
+"page_remove_rmap",0.0010,[kernel.kallsyms]_text
+"kmem_cache_free",0.0010,[kernel.kallsyms]_text
+
+
+"HOT PROCESSES (Sort Event - CPU_TIME)"
+PROCESS,"CPU_TIME" (seconds)
+/home/babreu/profiling/SnapQMC/snapshot (PID - 109601),3.0570
+
+Function Detail Data
+Function,File,Line,SourceCode,"CPU_TIME" (seconds)
+"matinv_",,,,1.9780
+,/home/babreu/profiling/SnapQMC/snapshot.f90,464,"subroutine matinv(aa,nsub,det)",0.0030
+,,483,"do 5  i=1,n",0.0010
+,,493,"do 10 i=1,n",0.0180
+,,494,"iclm=iclm+n",0.0060
+,,498,"adiag=aa(ipivot(i)+iclm)",0.0040
+,,500,"do 15 k=i+1,n",0.0240
+,,501,"if (abs(aa(ipivot(k)+iclm)).gt.abs(adiag)) then",0.5140
+,,502,"adiag=aa(ipivot(k)+iclm)",0.0080
+,,511,"if (idiag.ne.i) then",0.0150
+,,514,"ipivot(i)=ipivot(idiag)",0.0020
+,,520,"determ=adiag*determ",0.0080
+,,521,"aa(ipivot(i)+iclm)=cmplx(one,zero)",0.0080
+,,522,"adiagi=cmplx(one,zero)/adiag",0.0840
+,,526,"call sscal(n,adiagi,aa(ipivot(i)),n)",0.1420
+,,531,"do 20 j=1,n",0.0050
+,,532,"if (j.ne.ipivot(i)) then",0.0050
+,,533,"t=-aa(j+iclm)",0.0060
+,,534,"aa(j+iclm)=cmplx(zero,zero)",0.0110
+,,535,"call thissaxpy(n,t,aa(ipivot(i)),n,aa(j),n)",0.8880
+,,545,"do 30 j=1,n",0.0110
+,,547,"do 40 i=1,n",0.0010
+,,549,"do 50 i=1,n",0.0380
+,,550,"50 aa(i+jn)=atemp(ipivot(i))",0.0480
+,,552,"do 55 j=1,n",0.0040
+,,553,"55 ipivot(j)=(ipivot(j)-1)*n",0.0050
+,,556,"do 70 j=1,n",0.0040
+,,558,"70 atemp(j)=aa(i+jn)",0.0450
+,,559,"do 80 j=1,n",0.0090
+,,560,"80 aa(i+ipivot(j))=atemp(j)",0.0600
+,,564,"end",0.0010
+
+Function,File,Line,SourceCode,"CPU_TIME" (seconds)
+"MAIN__",,,,0.8520
+,/home/babreu/profiling/SnapQMC/snapshot.f90,277,"Iup = cmplx(zero,zero)",0.0020
+,,285,"oup=matmul(psi_uph,Iup)",0.0710
+,,294,"if (pratio .gt. rannyu()) then",0.0010
+,,305,"sdwn_new(ipart) = int(N_sites*rannyu())+1",0.0010
+,,307,"Idwn = cmplx(zero,zero)",0.0050
+,,309,"do i=1, N_dwn",0.0010
+,,315,"odwn=matmul(psi_dwnh,Idwn)",0.0670
+,,320,"call matinv(odwn,N_dwn,detodwn)",0.0010
+,,325,"sdwn_old(ipart)=sdwn_new(ipart)",0.0010
+,,361,"Iup = cmplx(zero,zero)",0.0100
+,,363,"do i=1, N_up",0.0040
+,,364,"Iup(sup_new(i),i)=cmplx(one,zero)",0.0010
+,,369,"oup=matmul(psi_uph,Iup)",0.3250
+,,380,"if (pratio .gt. rannyu()) then",0.0010
+,,381,"acc=acc+one",0.0010
+,,383,"pup_old=pup_new",0.0010
+,,390,"sdwn_new=sdwn_old",0.0050
+,,392,"sdwn_new(ipart) = int(N_sites*rannyu())+1",0.0010
+,,394,"Idwn = cmplx(zero,zero)",0.0180
+,,396,"do i=1, N_dwn",0.0070
+,,402,"odwn=matmul(psi_dwnh,Idwn)",0.3220
+,,412,"c_stp=c_stp+one",0.0020
+,,413,"if (pratio .gt. rannyu()) then",0.0010
+,,415,"sdwn_old(ipart)=sdwn_new(ipart)",0.0010
+,,423,"nconf=0",0.0020
+
+Function,"CPU_TIME" (seconds)
+"__memmove_avx_unaligned_erms" (SYSTEM MODULE FUNCTION),0.1030
+
+Function,"CPU_TIME" (seconds)
+"_intel_fast_memcpy" (DEBUG INFO NOT FOUND),0.0590
+
+Function,File,Line,SourceCode,"CPU_TIME" (seconds)
+"functions_mp_rannyu_",,,,0.0380
+,/home/babreu/profiling/SnapQMC/snapshot.f90,14,"i1=ll(1)*mm(4)+ll(2)*mm(3)+ll(3)*mm(2)+ll(4)*mm(1)",0.0020
+,,15,"i2=ll(2)*mm(4)+ll(3)*mm(3)+ll(4)*mm(2)",0.0010
+,,16,"i3=ll(3)*mm(4)+ll(4)*mm(3)",0.0010
+,,17,"i4=ll(4)*mm(4)",0.0010
+,,19,"i3=i3+i4/itwo12",0.0020
+,,20,"ll(3)=mod(i3,itwo12)",0.0010
+,,21,"i2=i2+i3/itwo12",0.0030
+,,22,"ll(2)=mod(i2,itwo12)",0.0060
+,,23,"ll(1)=mod(i1+i2/itwo12,itwo12)",0.0110
+,,24,"rannyu=ooto12*(float(ll(1)) + ooto12*(float(ll(2)) + ooto12*(float(ll(3)) + ooto12*(float(ll(4))))))",0.0070
+,,25,"end function rannyu",0.0030
+
+Function,"CPU_TIME" (seconds)
+"__memcpy_avx_unaligned" (SYSTEM MODULE FUNCTION),0.0120
+
+Function,"CPU_TIME" (seconds)
+"for_realloc_lhs" (DEBUG INFO NOT FOUND),0.0050
+
+Function,"CPU_TIME" (seconds)
+"[PLT] memcpy" (DEBUG INFO NOT FOUND),0.0040
+
+Function,"CPU_TIME" (seconds)
+"page_remove_rmap" (BINARY FILE NOT FOUND),0.0010
+
+Function,"CPU_TIME" (seconds)
+"kmem_cache_free" (BINARY FILE NOT FOUND),0.0010
+
