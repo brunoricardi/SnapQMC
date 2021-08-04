@@ -128,13 +128,13 @@ Integer:: i,j, iblock, imetrop, ipart, istep, is
 
 call setrn(irn)
 
-Lx=8
-Ly=8
-N_up=32
-N_dwn=32
+Lx=4
+Ly=4
+N_up=8
+N_dwn=8
 N_sites=Lx*Ly
 N_eq=10
-N_snap=500
+N_snap=50
 N_spb=400
 N_metrop=5
 

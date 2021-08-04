@@ -1,6 +1,6 @@
 program cluster
 Implicit none
-Integer, parameter:: N_snaps=500,N_sites=64,Lx=8,Ly=8
+Integer, parameter:: N_snaps=50,N_sites=16,Lx=4,Ly=4
 Integer:: i,j,k
 Real(8), Dimension(N_snaps,N_sites):: x,y
 Integer, Dimension(N_snaps,N_sites):: n
@@ -43,7 +43,7 @@ end program
 recursive subroutine count_hole(il,nl,xl,yl,c)
 Implicit none
 
-Integer, parameter :: N_sites = 64
+Integer, parameter :: N_sites = 16
 Integer, Dimension(N_sites) :: nl
 Real(8), Dimension(N_sites) :: xl, yl
 Real(8) :: r2
