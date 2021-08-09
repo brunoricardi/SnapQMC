@@ -29,8 +29,6 @@ program H_hex
     integer :: i, j, k, l, lmax, my   !! integer helpers
     real*8 :: dx, dy    !! lattice parameters
     real*8 :: x, y, r2  !! double helpers
-    real*8 :: global_dens, local_dens   !! densities
-    complex*16 :: diag       !! diagonal elements
     real*8, allocatable :: sites(:,:)   !! matrix with lattice sites positions
     real*8, allocatable :: eigvals(:) !! eigenvalues of the Hamiltonian
     complex*16, allocatable :: H_0(:,:), eigvecs(:,:) !! hamiltonian, its eigenvectors 
@@ -49,9 +47,8 @@ program H_hex
     allocate(H_0(N_sites,N_sites))
     H_0 = (0.0, 0.0)
     allocate(eigvecs(N_sites,N_sites))
-!    eigvecs = (0.0, 0.0)
     allocate(eigvals(N_sites))
-!    eigvals = 0.0
+
 
 
 !! start giving lattice sites their positions (this needs to be re-thought, lattice only needs to be created once)
